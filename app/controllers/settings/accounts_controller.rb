@@ -33,7 +33,7 @@ class Settings::AccountsController < ApplicationController
     params[:account].keys.each do |id| # NOTE: Rails 4.0.2 key, value ととると value が普通のハッシュになってしまう(strong parameters が効かない)
       attributes = params[:account][id].permit(:name, :asset_kind, :sort_key)
       account = user_accounts.find(id)
-      all_saved = false unless account.update_attributes(attributes)
+      all_saved = false unless account.update(attributes)
       @accounts << account
     end
     if all_saved
